@@ -1,0 +1,19 @@
+{
+  "name": "angular2",
+  "version": "1.0.0",
+  "description": "This project is deisgned to be a starting point to working with Angular 2 with AspNet Core.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradriske/Angular2AspNetCore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradriske/Angular2AspNetCore/issues"
+  },
+  "homepage": "https://github.com/bradriske/Angular2AspNetCore#readme"
+}
