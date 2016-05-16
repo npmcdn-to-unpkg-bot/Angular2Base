@@ -14,5 +14,5 @@ import { HomeComponent } from './components/home.component'
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true }
 ])
 export class AppComponent {
-    title = 'Hello World';
+    title = 'Angular 2 Starter';
 }
