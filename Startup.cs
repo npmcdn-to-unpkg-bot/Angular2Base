@@ -39,11 +39,9 @@ namespace Angular2Base
             app.UseMvc(
                 routes =>
                 {
-                    routes.MapRoute(
-                        name: "api",
-                        template: "api/{controller}/{action}/{id?}");
-                        routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        routes.MapRoute("spa-fallback", "{*anything}", new { controller = "Home", action = "Index" });
+                    routes.MapRoute("api", "api/{controller}/{action}/{id?}");
+                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    routes.MapRoute("spa-fallback", "{*anything}", new { controller = "Home", action = "Index" });
                 });
         }
     }
