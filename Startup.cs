@@ -1,53 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Serialization;
 
-namespace Angular2
+namespace Angular2Base
 {
     public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            // Add JSON Options to camel case C# class names to javascipt names Id => id
-            services.AddMvc().AddJsonOptions(options =>
-                  {
-                      options.SerializerSettings.ContractResolver =
-                          new CamelCasePropertyNamesContractResolver();
-                  });
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseDeveloperExceptionPage();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseMvc(config =>
-            {   
-                // set all undefined routes to return the Home/Index so Angular can take over
-                // The API has the route defined in the controller class
-                config.MapRoute("default", 
-                                "{controller=Home}/{action=Index}/{id?}");
-                config.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });         
-            });
+            app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        name: "api",
+                        template: "api/{controller}/{action}/{id?}");
+                        routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        routes.MapRoute("spa-fallback", "{*anything}", new { controller = "Home", action = "Index" });
+                });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
     }
 }
