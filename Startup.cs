@@ -41,7 +41,8 @@ namespace Angular2Base
                 {
                     routes.MapRoute("api", "api/{controller}/{action}/{id?}");
                     routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                    routes.MapRoute("spa-fallback", "{*anything}", new { controller = "Home", action = "Index" });
+                    
+                    routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
                 });
         }
     }
