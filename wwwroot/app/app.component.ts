@@ -19,9 +19,15 @@ import { DetailComponent } from './components/detail.component'
 
 export class AppComponent implements OnInit {
     title = 'Angular 2 Starter';
+
     constructor(private router: Router){
         
     }
+    
+    public activeRoute(path: string): boolean {
+        return this.router.urlTree.contains(this.router.createUrlTree([path]));
+    }
+    
     private OnInit(){
         
     }

@@ -1,8 +1,8 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li class="active"><a [routerLink]="['/home']">Home</a></li>
-            <li class=""><a [routerLink]="['/detail/2']">Details</a></li>
+            <li [class.active]="activeRoute('home')"><a [routerLink]="['/home']">Home</a></li>
+            <li [class.active]="activeRoute('detail')"><a [routerLink]="['/detail/2']">Details</a></li>
         </ul>
     </div>
 </nav>
