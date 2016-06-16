@@ -6,3 +6,7 @@ html, body{
 .navbar{
     margin-bottom: 0px;
 }
+
+a {
+    cursor: pointer;
+}
