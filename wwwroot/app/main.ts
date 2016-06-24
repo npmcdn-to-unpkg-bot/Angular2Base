@@ -1,9 +1,10 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import { ROUTER_PROVIDERS } from '@angular/router';
+import { RouterConfig } from '@angular/router';
 import { AppComponent } from './app.component';
-
-// enableProdMode();
+import { APP_ROUTER_PROVIDERS } from './app.routes';
 
 bootstrap(AppComponent, [
-    ROUTER_PROVIDERS
-]);
+  APP_ROUTER_PROVIDERS
+])
+
+// enableProdMode();
